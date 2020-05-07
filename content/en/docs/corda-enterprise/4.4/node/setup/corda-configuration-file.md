@@ -166,57 +166,24 @@ java -Dcorda.cordappSignerKeyFingerprintBlacklist.0="000000000000000000000000000
 
 ## Configuration file fields
 
-{{< note >}}
-The available configuration fields are listed below in alphabetic order.
-{{< /note >}}
+You can find all available configuration fields in the table below, listed in alphabetic order.
 
-`additionalP2PAddresses`
+{{< table >}}
 
-  An array of additional host:port values, which will be included in the advertised NodeInfo in the network map in addition to the `p2pAddress`.
-  Nodes can use this configuration option to advertise HA endpoints and aliases to external parties.
+| Filed name    | Description     | Default value | Notes |
+| :------------- | :------------- | :----------- | :---------- |
+|  `additionalP2PAddresses` |  An array of additional host:port values, which will be included in the advertised NodeInfo in the network map in addition to the `p2pAddress`. Nodes can use this configuration option to advertise HA endpoints and aliases to external parties. | Empty list | - |
+|  `attachmentContentCacheSizeMegaBytes` | Optionally specify how much memory should be used to cache attachment contents in memory. | 10MB | - |
+| `attachmentCacheBound` | Optionally specify how many attachments should be cached locally. Note that this includes only the key and metadata, the content is cached separately and can be loaded lazily. | 1024 | - |
+| `blacklistedAttachmentSigningKeys` | List of SHA-256 hashes of public keys. Attachments signed by any of these public keys will not be considered as trust roots for any attachments received over the network. This property is similar to `cordappSignerKeyFingerprintBlacklist` but only restricts CorDapps that were included as attachments in a transaction and received over the network from a peer. | Default not defined | - |
+| `compatibilityZoneURL` *deprecated* | The root address of the Corda compatibility zone network management services, it is used by the Corda node to register with the network and obtain a Corda node certificate, and also is used by the node to obtain network map information. Cannot be set at the same time as the `networkServices` option. | Default not defined | This configuration value is deprecated, please use `networkServices` |
+| `cordappSignerKeyFingerprintBlacklist` | List of the public keys fingerprints (SHA-256 of public key hash) not allowed as Cordapp JARs signers. The node will not load Cordapps signed by those keys. The option takes effect only in production mode and defaults to Corda development keys (``["56CA54E803CB87C8472EBD3FBC6A2F1876E814CEEBF74860BD46997F40729367", "83088052AF16700457AE2C978A7D8AC38DD6A7C713539D00B897CD03A5E5D31D"]``), in development mode any key is allowed to sign Cordpapp JARs. | Default not defined | This property requires retrieving the hashes of public keys that need to be blacklisted. |
 
-  *Default:* empty list
 
-`attachmentContentCacheSizeMegaBytes`
 
-  Optionally specify how much memory should be used to cache attachment contents in memory.
+{{< /table >}}
 
-  *Default:* 10MB
 
-`attachmentCacheBound`
-
-  Optionally specify how many attachments should be cached locally. Note that this includes only the key and metadata, the content is cached separately and can be loaded lazily.
-
-  *Default:* 1024
-
-`blacklistedAttachmentSigningKeys`
-
-  List of SHA-256 hashes of public keys. Attachments signed by any of these public keys will not be considered as trust roots for any attachments received over the network.
-  This property is similar to `cordappSignerKeyFingerprintBlacklist` but only restricts CorDapps that were
-  included as attachments in a transaction and received over the network from a peer.
-
-  This property requires retrieving the hashes of public keys that need to be blacklisted.
-
-   *Default:* not defined
-
-`compatibilityZoneURL` **deprecated**
-
-  The root address of the Corda compatibility zone network management services, it is used by the Corda node to register with the network and obtain a Corda node certificate, and also is used by the node to obtain network map information.
-  Cannot be set at the same time as the `networkServices` option.
-
-  **Important:  This configuration value is deprecated, please use `networkServices`**
-
-  *Default:* not defined
-
-`cordappSignerKeyFingerprintBlacklist`
-
-  List of the public keys fingerprints (SHA-256 of public key hash) not allowed as Cordapp JARs signers.
-  The node will not load Cordapps signed by those keys.
-  The option takes effect only in production mode and defaults to Corda development keys (``["56CA54E803CB87C8472EBD3FBC6A2F1876E814CEEBF74860BD46997F40729367", "83088052AF16700457AE2C978A7D8AC38DD6A7C713539D00B897CD03A5E5D31D"]``), in development mode any key is allowed to sign Cordpapp JARs.
-
-  This property requires retrieving the hashes of public keys that need to be blacklisted.
-
-  *Default:* not defined
 
 `crlCheckSoftFail`
   This is a boolean flag that when enabled (i.e. ``true`` value is set) causes certificate revocation list (CRL) checking to use soft fail mode.
