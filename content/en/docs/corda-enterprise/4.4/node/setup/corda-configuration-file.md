@@ -178,41 +178,15 @@ You can find all available configuration fields in the table below, listed in al
 | `blacklistedAttachmentSigningKeys` | List of SHA-256 hashes of public keys. Attachments signed by any of these public keys will not be considered as trust roots for any attachments received over the network. This property is similar to `cordappSignerKeyFingerprintBlacklist` but only restricts CorDapps that were included as attachments in a transaction and received over the network from a peer. | Default not defined | - |
 | `compatibilityZoneURL` *deprecated* | The root address of the Corda compatibility zone network management services, it is used by the Corda node to register with the network and obtain a Corda node certificate, and also is used by the node to obtain network map information. Cannot be set at the same time as the `networkServices` option. | Default not defined | This configuration value is deprecated, please use `networkServices` |
 | `cordappSignerKeyFingerprintBlacklist` | List of the public keys fingerprints (SHA-256 of public key hash) not allowed as Cordapp JARs signers. The node will not load Cordapps signed by those keys. The option takes effect only in production mode and defaults to Corda development keys (``["56CA54E803CB87C8472EBD3FBC6A2F1876E814CEEBF74860BD46997F40729367", "83088052AF16700457AE2C978A7D8AC38DD6A7C713539D00B897CD03A5E5D31D"]``), in development mode any key is allowed to sign Cordpapp JARs. | Default not defined | This property requires retrieving the hashes of public keys that need to be blacklisted. |
-
-
+| `crlCheckSoftFail` |  a boolean flag that when enabled (i.e. ``true`` value is set) causes certificate revocation list (CRL) checking to use soft fail mode. Soft fail mode allows the revocation check to succeed if the revocation status cannot be determined because of a network error. If this parameter is set to ``false`` rigorous CRL checking takes place. This involves each certificate in the certificate path being checked for a CRL distribution point extension, and that this extension points to a URL serving a valid CRL. This means that if any CRL URL in the certificate path is inaccessible, the connection with the other party will fail and be marked as bad. Additionally, if any certificate in the hierarchy, including the self-generated node SSL certificate, is missing a valid CRL URL, then the certificate path will be marked as invalid. | True | - |
+| `cryptoServiceName` | Optional name of the CryptoService implementation. This only needs to be set if you intend to use a different provider than the default one. | - | - |
+| `cryptoServiceConf` | Optional path to the configuration file for the CryptoService provider. This may have to be present if you use a different CryptoService provider than the default one. | - | - |
+| `cryptoServiceTimeout` | Optional timeout value of actions sent to the the CryptoService (HSM). If the HSM takes longer than this duration to respond then a `TimedCryptoServiceException` will be thrown and handled by the Flow Hospital. | 1 second | - |
+| `custom` | Set custom command line attributes (e.g. Java system properties) on the node process via the capsule launcher | - | - |
+| `jvmArgs` | A list of JVM arguments to apply to the node process. This removes any defaults specified from ``corda.jar``, but can be overridden from the command line. | Not defined | - |
+| `database` | Database configuration | - | - |
 
 {{< /table >}}
-
-
-
-`crlCheckSoftFail`
-  This is a boolean flag that when enabled (i.e. ``true`` value is set) causes certificate revocation list (CRL) checking to use soft fail mode.
-  Soft fail mode allows the revocation check to succeed if the revocation status cannot be determined because of a network error.
-  If this parameter is set to ``false`` rigorous CRL checking takes place. This involves each certificate in the certificate path being checked for a CRL distribution point extension, and that this extension points to a URL serving a valid CRL.
-  This means that if any CRL URL in the certificate path is inaccessible, the connection with the other party will fail and be marked as bad.
-  Additionally, if any certificate in the hierarchy, including the self-generated node SSL certificate, is missing a valid CRL URL, then the certificate path will be marked as invalid.
-
-  *Default:* true
-
-`cryptoServiceName`
-  Optional name of the CryptoService implementation. This only needs to be set if you intend to use a different provider than the default one.
-
-`cryptoServiceConf`
-  Optional path to the configuration file for the CryptoService provider. This may have to be present if you use a different CryptoService provider
-  than the default one.
-
-`cryptoServiceTimeout`
-  Optional timeout value of actions sent to the the CryptoService (HSM). If the HSM takes longer than this duration to respond then a ``TimedCryptoServiceException`` will be thrown and handled by the Flow Hospital.
-
-  *Default:* 1s
-
-`custom`
-  Set custom command line attributes (e.g. Java system properties) on the node process via the capsule launcher
-
-  `jvmArgs`:
-   A list of JVM arguments to apply to the node process. This removes any defaults specified from ``corda.jar``, but can be overridden from the command line.
-
-   *Default:* not defined
 
 `database`
   Database configuration
