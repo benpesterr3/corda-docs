@@ -184,7 +184,8 @@ You can find all available configuration fields in the table below, listed in al
 | `cryptoServiceTimeout` | Optional timeout value of actions sent to the the CryptoService (HSM). If the HSM takes longer than this duration to respond then a `TimedCryptoServiceException` will be thrown and handled by the Flow Hospital. | 1 second | - |
 | `custom` | Set custom command line attributes (e.g. Java system properties) on the node process via the capsule launcher | - | - |
 | `jvmArgs` | A list of JVM arguments to apply to the node process. This removes any defaults specified from ``corda.jar``, but can be overridden from the command line. | Not defined | - |
-| `database` | Database configuration | - | - |
+| **`database`** | Database configuration | - | - |
+
 
 {{< /table >}}
 
