@@ -184,25 +184,17 @@ You can find all available configuration fields in the table below, listed in al
 | `cryptoServiceTimeout` | Optional timeout value of actions sent to the the CryptoService (HSM). If the HSM takes longer than this duration to respond then a `TimedCryptoServiceException` will be thrown and handled by the Flow Hospital. | 1 second | - |
 | `custom` | Set custom command line attributes (e.g. Java system properties) on the node process via the capsule launcher | - | - |
 | `jvmArgs` | A list of JVM arguments to apply to the node process. This removes any defaults specified from ``corda.jar``, but can be overridden from the command line. | Not defined | - |
-| **`database`** | Database configuration | - | - |
+| **`database`** | **Database configuration** | - | - |
+| - | - | - | - |
+| `transactionIsolationLevel` | Transaction isolation level as defined by the ``TRANSACTION_`` constants in ``java.sql.Connection``, but without the ``TRANSACTION_`` prefix. | ``REPEATABLE_READ`` | - |
+| `exportHibernateJMXStatistics` | Whether to export Hibernate JMX statistics. | false | Caution: enabling this option can cause expensive run-time overheads. |
+| `initialiseSchema` | The property is used only when a node runs against a H2 database, and it's replaced by the ``runMigration`` property for other databases. | - | - |
+
 
 
 {{< /table >}}
 
-`database`
-  Database configuration
 
-  `transactionIsolationLevel`:
-    Transaction isolation level as defined by the ``TRANSACTION_`` constants in ``java.sql.Connection``, but without the ``TRANSACTION_`` prefix.
-
-   *Default:* ``REPEATABLE_READ``
-
-  `exportHibernateJMXStatistics`:
-    Whether to export Hibernate JMX statistics.
-
-   **Caution: enabling this option causes expensive run-time overhead**
-
-   *Default:* false
 
   `initialiseSchema`
    The property is used only when a node runs against a H2 database, and it's replaced by the ``runMigration`` property for other databases.
